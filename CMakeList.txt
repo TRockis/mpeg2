@@ -1,0 +1,12 @@
+# cmake version
+cmake_minimum_required(VERSION 3.2)
+
+# project name
+PROJECT(mik_mpeg2)
+
+# head file path
+INCLUDE_DIRECTORIES(
+    H264Packet,
+    jitterbuffer,
+    PSPacket
+)
