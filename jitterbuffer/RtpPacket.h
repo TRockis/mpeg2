@@ -67,6 +67,7 @@ private:
 
 public:
     RtpPacket(unsigned char* data);
+    ~RtpPacket();
 
     /**
      * 对传入的数据进行解析，得到结构化后的RTP数据包

@@ -19,5 +19,5 @@ private:
 public:
     H264Packet* parse();        //用于解析一个PS数据包，返回一个H264数据包
     PSPacket();
-    PSPacket(char* data);       //将一帧数据转换为一个PS数据包
+    PSPacket(unsigned char* data);       //将一帧数据转换为一个PS数据包
 };

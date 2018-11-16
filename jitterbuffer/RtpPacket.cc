@@ -2,6 +2,7 @@
 #include "../Utils/StringUtil.h"
 /**
  * 构造函数
+ * 在构造的同时进行数据包的解析
  */
 RtpPacket::RtpPacket(unsigned char* packetData){
     this->rowData = packetData;
@@ -15,6 +16,7 @@ RtpPacket::RtpPacket(unsigned char* packetData){
 void RtpPacket::parse(){
     int start = 0;
     int length = StringUtil::getLength(rowData);
+
     this->version = StringUtil::stringToInt(rowData, start, start+2);
     //指针后移两位
     start = start + 2;
@@ -58,5 +60,12 @@ void RtpPacket::parse(){
     }
 
     this->payload = rowData + start;
+}
+
+/**
+ * 析构函数
+ */
+RtpPacket::~RtpPacket(){
+    delete[] this->CSRC;
 }
 
