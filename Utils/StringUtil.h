@@ -10,4 +10,5 @@ public:
     static long stringToLong(unsigned char* data, int start, int end);
     static unsigned long stringToUlong(unsigned char* data, int start, int end);
     static bool stringToBool(unsigned char* data, int index);
+    static unsigned char* deepCopy(unsigned char* data);
 };
