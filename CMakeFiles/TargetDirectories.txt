@@ -1,3 +1,0 @@
-/home/xiby/repositories/mpeg2/CMakeFiles/edit_cache.dir
-/home/xiby/repositories/mpeg2/CMakeFiles/rebuild_cache.dir
-/home/xiby/repositories/mpeg2/CMakeFiles/mpeg2.dir
