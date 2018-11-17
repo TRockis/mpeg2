@@ -20,6 +20,24 @@ int StringUtil::stringToInt(unsigned char* data, int start, int end){
     return ret;
 }
 
+/**
+ * 字符转布尔类型
+ */
+bool StringUtil::stringToBool(unsigned char* data, int start){
+    return true;
+}
+
+unsigned int StringUtil::stringToUint(unsigned char* data, int start, int end){
+    return 0;
+}
+
+unsigned long StringUtil::stringToUlong(unsigned char* data, int start, int end){
+    unsigned long ret = 0;
+    return ret;
+}
+/**
+ * 深拷贝
+ */
 unsigned char* StringUtil::deepCopy(unsigned char* data){
     int dataLength = StringUtil::getLength(data);
     unsigned char* ret = new unsigned char[dataLength];

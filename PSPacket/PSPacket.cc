@@ -8,10 +8,10 @@ H264Packet* PSPacket::parse(){
     return NULL;
 }
 
-H264Packet::H264Packet(){
+PSPacket::PSPacket(){
 
 }
 
-H264Packet::H264Packet(unsigned char* data){
+PSPacket::PSPacket(unsigned char* data){
     this->rowData = data;
 }

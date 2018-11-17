@@ -5,19 +5,6 @@
  */
 #include "RtpPacket.h"
 #include "../H264Packet/H264Packet.h"
-class JitterBuffer{
-private:
-    BufferNode* buffer;
-
-public:
-    JitterBuffer();
-    H264Packet* pushPacket(RtpPacket rtpPacket);
-
-private:
-    void addNode(RtpPacket rtpPacket);
-    void deleteNode(BufferNode* preNode);
-
-};
 
 /**
  * 缓存节点
@@ -38,3 +25,16 @@ public:
     void setNext(BufferNode* nextNode);
 };
 
+class JitterBuffer{
+private:
+    BufferNode* buffer;
+
+public:
+    JitterBuffer();
+    H264Packet* pushPacket(RtpPacket rtpPacket);
+
+private:
+    void addNode(RtpPacket rtpPacket);
+    void deleteNode(BufferNode* preNode);
+
+};
