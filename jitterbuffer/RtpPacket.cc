@@ -62,10 +62,17 @@ void RtpPacket::parse(){
     this->payload = rowData + start;
 }
 
+unsigned char* RtpPacket::getPayload(){
+    return this->payload;
+}
+
+unsigned long RtpPacket::getTimeStamp(){
+    return this->timeStamp;
+}
+
 /**
  * 析构函数
  */
 RtpPacket::~RtpPacket(){
     delete[] this->CSRC;
 }
-

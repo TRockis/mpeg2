@@ -12,17 +12,18 @@
 class BufferNode{
 private:
     unsigned long timeStamp;
-    RtpPacket* data;
+    unsigned char* data;
     BufferNode* next;
 public:
     BufferNode();
-    BufferNode(unsigned long timeStamp, RtpPacket* data);
+    BufferNode(unsigned long timeStamp, unsigned char* data);
     unsigned long getTimeStamp();
-    RtpPacket* getData();
+    unsigned char* getData();
     void setTimeStamp(unsigned long timeStamp);
-    void setData(RtpPacket* data);
+    void setData(unsigned char* data);
     BufferNode* getNext();
     void setNext(BufferNode* nextNode);
+    bool hasNext();
 };
 
 class JitterBuffer{
@@ -34,7 +35,8 @@ public:
     H264Packet* pushPacket(RtpPacket rtpPacket);
 
 private:
-    void addNode(RtpPacket rtpPacket);
+    void addNode(RtpPacket* rtpPacket);
     void deleteNode(BufferNode* preNode);
+    void doInsert(RtpPacket* rtpPacket, BufferNode* preNode);
 
 };
