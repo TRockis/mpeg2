@@ -12,7 +12,6 @@ RtpPacket::RtpPacket(unsigned char* packetData){
 
 /**
  * 进行解析
- * FIXME 此处有很大的问题，不能直接移指针，需要用到位运算
  */
 void RtpPacket::parse(){
     int start = 0;
@@ -45,18 +44,16 @@ void RtpPacket::parse(){
      */
     this->sequence = StringUtil::stringToUint(rowData, 2, 4);
 
-    this->timeStamp = StringUtil::stringToUlong(rowData, start, start + 32);
-    //指针后移32位
-    start += 32;
+    this->timeStamp = StringUtil::stringToUlong(rowData, 4, 8);
 
-    this->SSRC = StringUtil::stringToUlong(rowData, start, start + 32);
-    //指针后移32位
-    start += 32;
+    this->SSRC = StringUtil::stringToUlong(rowData, 8, 12);
 
     this->CSRC = new unsigned long[csrcCount];
+
+    start = 12;
     for(int i = 0; i < csrcCount; ++i){
-        this->CSRC[i] = StringUtil::stringToUlong(rowData, start, start + 32);
-        start += 32;
+        this->CSRC[i] = StringUtil::stringToUlong(rowData, start, start + 4);
+        start += 4;
     }
 
     this->payload = rowData + start;
