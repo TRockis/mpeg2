@@ -17,46 +17,43 @@ void RtpPacket::parse(){
     int start = 0;
     int length = StringUtil::getLength(rowData);
 
-    this->version = StringUtil::stringToInt(rowData, start, start+2);
-    //指针后移两位
-    start = start + 2;
+    /**
+     * 先获取前两位
+     * 再进行移位操作
+     */
+    this->version = (rowData[0] & 0xC0) >> 6;
 
-    this->padding = StringUtil::stringToBool(rowData, start);
-    //指针后移一位
-    start++;
+    /**
+     * 获取第三位，再进行移位操作
+     */
+    this->padding = (rowData[0] & 0x20) >> 5;
 
-    this->extention = StringUtil::stringToBool(rowData, start);
-    //指针后移一位
-    start++;
+    /**
+     * 获取第四位，再进行移位操作
+     */
+    this->extention = (rowData[0] & 0x10) >> 4;
 
-    this->csrcCount = StringUtil::stringToInt(rowData, start, start + 4);
-    //指针后移四位
-    start = start + 4;
+    this->csrcCount = (rowData[0] & 0x0F);
 
-    this->mark = StringUtil::stringToBool(rowData, start);
-    //指针后移一位
-    start++;
+    this->mark = (rowData[1] & 0x80) >> 7;
 
-    this->payloadType = StringUtil::stringToInt(rowData, start, start + 7);
-    //指针后移7位
-    start += 7;
+    this->payloadType = (rowData[1] && 0x8F);
 
-    this->sequence = StringUtil::stringToUint(rowData, start, start + 16);
-    //指针后移16位
-    start += 16;
+    /**
+     * 为了统一，是不是应该去掉这个
+     */
+    this->sequence = StringUtil::stringToUint(rowData, 2, 4);
 
-    this->timeStamp = StringUtil::stringToUlong(rowData, start, start + 32);
-    //指针后移32位
-    start += 32;
+    this->timeStamp = StringUtil::stringToUlong(rowData, 4, 8);
 
-    this->SSRC = StringUtil::stringToUlong(rowData, start, start + 32);
-    //指针后移32位
-    start += 32;
+    this->SSRC = StringUtil::stringToUlong(rowData, 8, 12);
 
     this->CSRC = new unsigned long[csrcCount];
+
+    start = 12;
     for(int i = 0; i < csrcCount; ++i){
-        this->CSRC[i] = StringUtil::stringToUlong(rowData, start, start + 32);
-        start += 32;
+        this->CSRC[i] = StringUtil::stringToUlong(rowData, start, start + 4);
+        start += 4;
     }
 
     this->payload = rowData + start;

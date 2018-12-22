@@ -48,3 +48,17 @@ unsigned char* StringUtil::deepCopy(unsigned char* data){
     ret[dataLength] = '\0';
     return ret;
 }
+
+/**
+ *
+ */
+unsigned char* StringUtil::connect(unsigned char* sourceString, unsigned char* appendex){
+  int sourceLength = StringUtil.getLength(sourceString);
+  int appendexLength = StringUtil.getLength(appendex);
+
+  for(int i = 0; i < appendexLength; ++i){
+    sourceString[sourceLength + i] = appendex[i];
+  }
+
+  sourceString[sourceLength + appendexLength] = '\0';
+}

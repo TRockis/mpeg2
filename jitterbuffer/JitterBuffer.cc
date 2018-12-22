@@ -61,6 +61,9 @@ JitterBuffer::JitterBuffer()
     this->buffer = new BufferNode();
 }
 
+/**
+  * 添加帧结束的判断
+ */
 void JitterBuffer::addNode(RtpPacket *rtpPacket)
 {
     /**
@@ -78,8 +81,9 @@ void JitterBuffer::addNode(RtpPacket *rtpPacket)
         {
             /**
              * 此时时间戳相同，则将其数据部分复制到当前节点的数据部分尾部
+             * 此时添加帧结束的判断
              */
-            
+            headNode->getNext()->setData(headNode->getNext()->getData(), rtpPacket->getData());
             inserted = true;
             break;
         }

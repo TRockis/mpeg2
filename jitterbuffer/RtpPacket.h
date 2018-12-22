@@ -3,7 +3,7 @@
  */
 
 class RtpPacket{
-    
+
 private:
     unsigned char* rowData;         //原始数据
 
